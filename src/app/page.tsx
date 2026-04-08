@@ -1,15 +1,10 @@
 "use client";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-
-const BodyViewer = dynamic(() => import("@/components/3d/BodyViewer"), {
-  ssr: false,
-});
+import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
   return (
-    <main style={{ paddingTop: "60px" }}>
-      <BodyViewer />
+    <main className="pt-14">
+      <HeroSection />
     </main>
   );
 }
