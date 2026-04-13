@@ -11,12 +11,21 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  /* backgrounds */
   --color-espresso: #1c1917;
   --color-linen: #f5f0e8;
   --color-parchment: #fdf8f0;
+
+  /* accents */
   --color-bronze: #c97b3a;
   --color-amber: #e8a86b;
+  --color-warmcream: #fdf0e0;
+
+  /* text */
   --color-stone: #78716c;
+  --color-charcoal: #44403c;
+  --color-warmgray: #a8a29e;
+  --color-ink: #1c1917;
 }
 
 @media (prefers-color-scheme: dark) {

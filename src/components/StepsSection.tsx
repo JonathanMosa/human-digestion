@@ -1,98 +1,41 @@
 "use client";
-import Image from "next/image";
+import { useState } from "react";
+
+const steps = [
+  { id: "step1", label: "Step 1", name: "Mouth" },
+  { id: "step2", label: "Step 2", name: "Esophagus" },
+  { id: "step3", label: "Step 3", name: "Stomach" },
+  { id: "step4", label: "Step 4", name: "Small Intestine" },
+  { id: "step5", label: "Step 5", name: "Large Intestine" },
+];
 
 export default function StepsSection() {
+  const [selected, setSelected] = useState("step1"); // ← tracks which is active
+
   return (
-    <section className="px-20 py-16 bg-parchment">
-      <p className="text-sm tracking-widest uppercase text-stone pb-8 font-bold">
+    <section className="px-20 py-16 bg-linen">
+      <p className="text-sm tracking-widest uppercase text-stone pb-8">
         Digestion Pathway
       </p>
 
-      <div className="flex flex-row gap-16">
-        <div className="border-b border-stone rounded-md px-4 py-4 flex flex-col items-start w-40 h-88 bg-[#ecc582] hover:cursor-pointer">
-          <Image //Maybe upgrade or get rid of feat
-            src="/mouth.png"
-            alt="Mouth"
-            width={40}
-            height={40}
-            className="mb-3"
-          />
-          <p className="text-xs text-stone uppercase tracking wide mb-2">
-            Step 1
-          </p>
-          <p className="text-sm font-medium text-espresso">Mouth</p>
-          <p className="text-xs text-stone mt-2 leading-relaxed">
-            Couple Sentence Description
-          </p>
-        </div>
-
-        <div className="border-b border-stone rounded-md px-4 py-4 flex flex-col items-start w-40 h-88 bg-[#ecc582] hover:cursor-pointer">
-          <Image //Maybe upgrade or get rid of feat
-            src="/esophagus.svg"
-            alt="Mouth"
-            width={40}
-            height={40}
-            className="mb-3 mix-blend-multiply"
-          />
-          <p className="text-xs text-stone uppercase tracking wide mb-2">
-            Step 2
-          </p>
-          <p className="text-sm font-medium text-espresso">Esophagus</p>
-          <p className="text-xs text-stone mt-2 leading-relaxed">
-            Couple Sentence Description
-          </p>
-        </div>
-
-        <div className="border-b border-stone rounded-md px-4 py-4 flex flex-col items-start w-40 h-88 bg-[#ecc582] hover:cursor-pointer">
-          <Image //Maybe upgrade or get rid of feat
-            src="/stomach.png"
-            alt="Mouth"
-            width={80}
-            height={80}
-            className="mb-3 mix-blend-multiply pr-4"
-          />
-          <p className="text-xs text-stone uppercase tracking wide mb-2">
-            Step 3
-          </p>
-          <p className="text-sm font-medium text-espresso">Stomach</p>
-          <p className="text-xs text-stone mt-2 leading-relaxed">
-            Couple Sentence Description
-          </p>
-        </div>
-
-        <div className="border-b border-stone rounded-md px-4 py-4 flex flex-col items-start w-40 h-88 bg-[#ecc582] hover:cursor-pointer">
-          <Image //Maybe upgrade or get rid of feat
-            src="/smallintestine.png"
-            alt="Mouth"
-            width={60}
-            height={80}
-            className="mb-3 mix-blend-multiply pr-4"
-          />
-          <p className="text-xs text-stone uppercase tracking wide mb-2">
-            Step 4
-          </p>
-          <p className="text-sm font-medium text-espresso">Small Intestine</p>
-          <p className="text-xs text-stone mt-2 leading-relaxed">
-            Couple Sentence Description
-          </p>
-        </div>
-
-        <div className="border-b border-stone rounded-md px-4 py-4 flex flex-col items-start w-40 h-88 bg-[#ecc582] hover:cursor-pointer">
-          <Image //Maybe upgrade or get rid of feat
-            src="/largeintestine.png"
-            alt="Mouth"
-            width={50}
-            height={80}
-            className="mb-3 mix-blend-multiply pr-4"
-          />
-          <p className="text-xs text-stone uppercase tracking wide mb-2">
-            Step 5
-          </p>
-          <p className="text-sm font-medium text-espresso">Large Intestine</p>
-          <p className="text-xs text-stone mt-2 leading-relaxed">
-            Couple Sentence Description
-          </p>
-        </div>
+      <div className="flex gap-6">
+        {steps.map((step) => (
+          <div
+            key={step.id}
+            onClick={() => setSelected(step.id)} // ← clicking sets this as selected
+            className={`rounded-xl px-6 py-8 flex flex-col gap-3 w-52 cursor-pointer transition
+              ${
+                selected === step.id
+                  ? "bg-bronze border border-bronze" // ← active style
+                  : "bg-[#ecc582] border border-stone" // ← inactive style
+              }`}
+          >
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#7a5c2e]">
+              {step.label}
+            </p>
+            <p className="text-xl font-medium text-espresso">{step.name}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

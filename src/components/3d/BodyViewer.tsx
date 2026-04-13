@@ -67,7 +67,10 @@ const BodyViewer = () => {
         style={{ background: "transparent" }}
         camera={{ position: [0, 0, 12] }}
       >
-        <Hotspot position={[0, 5, 0]} onClick={() => console.log("clicked")} />
+        <Hotspot
+          position={[0, 5.5, 0.7]}
+          onClick={() => console.log("clicked")}
+        />
         <ambientLight intensity={1} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <OrbitControls
