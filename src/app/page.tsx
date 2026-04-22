@@ -11,8 +11,6 @@ export default function Home() {
       <StepsSection />
       <SingleStepSection />
       <TestSection />
-=======
->>>>>>> 02a9dd2f979c4fa06074e1d86b1a18cb90d27b5d
     </main>
   );
 }
