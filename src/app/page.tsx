@@ -1,5 +1,6 @@
 "use client";
 import HeroSection from "@/components/HeroSection";
+import SingleStepSection from "@/components/SingleStepSection";
 import StepsSection from "@/components/StepsSection";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <main className="pt-14">
       <HeroSection />
       <StepsSection />
+      <SingleStepSection />
     </main>
   );
 }
