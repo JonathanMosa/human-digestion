@@ -30,7 +30,11 @@ export default function SingleStepSection() {
           <Image
             width={300}
             height={300}
+<<<<<<< HEAD
             className="rounded-lg "
+=======
+            className="rounded-lg"
+>>>>>>> 02a9dd2f979c4fa06074e1d86b1a18cb90d27b5d
             alt="throat"
             src="esophagus.svg"
           />
