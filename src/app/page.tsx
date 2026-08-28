@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import SingleStepSection from "@/components/SingleStepSection";
 import StepsSection from "@/components/StepsSection";
 import TestSection from "@/components/TestSection";
+import FooterSection from "@/components/FooterSection";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <StepsSection />
       <SingleStepSection />
       <TestSection />
+      <FooterSection />
     </main>
   );
 }
