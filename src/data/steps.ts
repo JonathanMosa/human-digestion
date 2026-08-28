@@ -6,6 +6,7 @@ export type QuizOption = {
 
 export type Step = {
     id: string;    // semantic: "mouth", "esophagus", ...
+    label: string
     organ: string;  // display name: "Mouth"
     heading: string; // lesson title, plain text
     body: string[];   // one string per paragraph
@@ -22,6 +23,7 @@ export type Step = {
 export const steps: Step[] = [
     {
       id: "mouth",
+      label: "Step 1",
       organ: "Mouth",
       heading: "Where digestion begins",
       body: [
@@ -47,6 +49,7 @@ export const steps: Step[] = [
 
     {
       id: "esophagus",
+      label: "Step 2",
       organ: "Esophagus",
       heading: "A one-way muscular trip",
       body: [
@@ -72,6 +75,7 @@ export const steps: Step[] = [
   
     {
       id: "stomach",
+      label: "Step 3",
       organ: "Stomach",
       heading: "Where food becomes liquid",
       body: [
@@ -97,6 +101,7 @@ export const steps: Step[] = [
 
     {
       id: "smallintestine",
+      label: "Step 4",
       organ: "Small Intestine",
       heading: "Where nutrients enter the body",
       body: [
@@ -122,6 +127,7 @@ export const steps: Step[] = [
 
     {
       id: "largeintestine",
+      label: "Step 5",
       organ: "Large Intestine",
       heading: "Water, bacteria, and what remains",
       body: [
