@@ -5,7 +5,7 @@ const BodyViewer = dynamic(() => import("@/components/3d/BodyViewer"), {
   ssr: false,
 });
 
-export default function HeroSection() {
+export default function HeroSection({ onSelect }: { onSelect: (id: string) => void }) {
   return (
     <section className="flex items-center px-20 py-12 min-h-screen">
       <div className=" flex flex-col gap-6">
@@ -29,7 +29,7 @@ export default function HeroSection() {
       </div>
 
       <div style={{ width: "100%", height: "600px " }}>
-        <BodyViewer />
+        <BodyViewer onSelect={onSelect}/>
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <main className="pt-14">
-      <HeroSection />
+      <HeroSection onSelect={setSelectedId}/>
       <StepsSection selectedId={selectedId} onSelect={setSelectedId} />
       <SingleStepSection step={selectedStep} />
       <TestSection />
