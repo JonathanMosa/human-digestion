@@ -19,7 +19,7 @@ export default function Home() {
       <HeroSection onSelect={setSelectedId}/>
       <StepsSection selectedId={selectedId} onSelect={setSelectedId} />
       <SingleStepSection step={selectedStep} />
-      <TestSection />
+      <TestSection quiz={selectedStep.quiz} key={selectedId}/>
       <FooterSection />
     </main>
   );

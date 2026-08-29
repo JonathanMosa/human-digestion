@@ -1,14 +1,9 @@
 "use client";
 import { useState } from "react";
+import { QuizOption } from "@/data/steps";
 
-const options = [
-  { id: "a", text: "Pepsin" },
-  { id: "b", text: "Salivary amylase", correct: true },
-  { id: "c", text: "Lipase" },
-  { id: "d", text: "Trypsin" },
-];
 
-export default function TestSection() {
+export default function TestSection({ quiz }: { quiz: { question: string, options: QuizOption[] } }){
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
@@ -19,10 +14,10 @@ export default function TestSection() {
       </div>
       <div>
         <p className="text-white pt-8">
-          Which enzyme in saliva begins breaking down carbohydrates?
+          {quiz.question}
         </p>
         <div className="grid grid-cols-2 gap-3 py-3 max-w-md">
-          {options.map((option) => (
+          {quiz.options.map((option) => (
             <button
               key={option.id}
               onClick={() => setSelected(option.id)}
