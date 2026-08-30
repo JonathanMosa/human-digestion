@@ -76,6 +76,7 @@ const BodyViewer = ({ onSelect }: { onSelect: (id: string) => void }) => {
       }}
     >
       <Canvas
+        frameloop="demand"
         style={{ background: "transparent" }}
         camera={{ position: [0, 0, 12] }}
       >
