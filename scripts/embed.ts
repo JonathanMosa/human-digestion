@@ -1,6 +1,10 @@
 import { steps } from "../src/data/steps";
 import { pipeline } from "@huggingface/transformers";
 import fs from "fs";
+import path from "path";
+
+// resolve off this file's location, not the working directory
+const outPath = path.join(__dirname, "..", "src", "data", "embeddings.json");
 
 const chunks = steps.flatMap((step) => [
   // one entry per body
@@ -37,10 +41,7 @@ async function main() {
   }
   console.log("done:", records.length);
 
-  fs.writeFileSync(
-    "../src/data/embeddings.json",
-    JSON.stringify(records, null, 2),
-  );
+  fs.writeFileSync(outPath, JSON.stringify(records, null, 2));
 }
 
 main();
