@@ -8,7 +8,7 @@ export const runtime = "nodejs";
 
 // embedding
 
-// load the model once and reuse it. 
+// load the model once and reuse it.
 let extractorPromise: Promise<any> | null = null;
 function getExtractor() {
   if (!extractorPromise) {
@@ -95,8 +95,7 @@ async function askGroq(context: string, question: string): Promise<string> {
 const recentByIp = new Map<string, number[]>();
 
 export async function POST(request: Request) {
-  const forwarded = request.headers.get("x-forwarded-for");
-  const ip = forwarded ? forwarded.split(",")[0].trim() : "local";
+  const ip = request.headers.get("x-real-ip") ?? "local";
 
   // keep only this IP's hits from the last minute, add the current one, reject if that's more than 10.
   const now = Date.now();
