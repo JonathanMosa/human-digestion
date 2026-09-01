@@ -2,32 +2,36 @@
 import { useState } from "react";
 import { QuizOption } from "@/data/steps";
 
-
-export default function TestSection({ quiz }: { quiz: { question: string, options: QuizOption[] } }){
+export default function TestSection({
+  quiz,
+}: {
+  quiz: { question: string; options: QuizOption[] };
+}) {
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <section className="bg-black flex flex-col gap-4 py-20 px-20">
-      <div className="flex flex-col justify-start">
-        <p className="text-white pb-2">Test your knowledge</p>
-        <p className="text-stone">One quick question per step</p>
-      </div>
-      <div>
-        <p className="text-white pt-8">
-          {quiz.question}
+    <section className="bg-[#171310] py-24">
+      <div className="max-w-6xl mx-auto px-8">
+        <p className="text-bronze text-xs tracking-widest uppercase font-bold">
+          Test your knowledge
         </p>
-        <div className="grid grid-cols-2 gap-3 py-3 max-w-md">
+        <h2 className="text-[#F5F0E8] text-xl font-medium mt-2">
+          {quiz.question}
+        </h2>
+        <p className="text-white/50 text-sm mt-1">One quick question per step.</p>
+
+        <div className="grid grid-cols-2 gap-3 mt-6">
           {quiz.options.map((option) => (
             <button
               key={option.id}
               onClick={() => setSelected(option.id)}
-              className={`rounded-md px-4 py-3 text-sm border transition  
+              className={`rounded-md border px-4 py-3 text-left text-sm transition
                 ${
                   selected === option.id && option.correct
                     ? "border-green-500 text-green-400"
                     : selected === option.id && !option.correct
                       ? "border-red-500 text-red-400"
-                      : "border-stone text-stone"
+                      : "border-white/20 text-[#F5F0E8] hover:border-bronze hover:bg-white/5"
                 }`}
             >
               {option.text}

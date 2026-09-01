@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import ChatWidget from "@/components/ChatWidget"; 
+import ChatWidget from "@/components/ChatWidget";
+import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SingleStepSection from "@/components/SingleStepSection";
 import StepsSection from "@/components/StepsSection";
@@ -17,6 +18,7 @@ export default function Home() {
 
   return (
     <main className="pt-14">
+      <Navbar selectedId={selectedId} onSelect={setSelectedId} />
       <ChatWidget />
       <HeroSection onSelect={setSelectedId}/>
       <StepsSection selectedId={selectedId} onSelect={setSelectedId} />

@@ -35,6 +35,14 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+button {
+  cursor: pointer;
+}
+
 body {
   background: #ecc582;
   color: var(--foreground);

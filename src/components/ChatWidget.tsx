@@ -1,15 +1,21 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 
-export default function ChatWidget() {
-  type Message = {
-    role: "user" | "assistant";
-    content: string;
-    sources?: string[]; //only assistant turns
-  };
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+  sources?: string[]; // only assistant turns
+};
 
-  const [messages, setMessages] = useState<Message[]>([]);
+// shown on mount so the panel isn't an empty white void
+const greeting: Message = {
+  role: "assistant",
+  content:
+    "Hi! I can answer questions about the five stages of digestion: mouth, esophagus, stomach, small intestine, and large intestine. What would you like to know?",
+};
+
+export default function ChatWidget() {
+  const [messages, setMessages] = useState<Message[]>([greeting]);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,44 +56,67 @@ export default function ChatWidget() {
   }
 
   const chatHistory = messages.map((message, i) => (
-    <div key={i} className="text-black py-1">
-      {message.content}
+    <div
+      key={i}
+      className={`flex py-2 ${
+        message.role === "user" ? "justify-end" : "justify-start"
+      }`}
+    >
+      <div className="max-w-[75%] rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-[#2A2520]">
+        {message.content}
+      </div>
     </div>
   ));
 
   return (
     <>
       {open ? (
-        <div className="fixed overflow-hidden w-96 h-[500px] max-h-[70vh] bottom-6 right-6 z-50 flex flex-col bg-white rounded-md shadow-xl shadow-black">
-          <div className="flex items-center gap-4 px-4 py-4 bg-bronze">
-            <div className="mr-auto"> Human Digestion Chat</div>
-            {/* '—': Minimize & Keep Chat logs */}
-            <button className="ml-24 cursor-pointer" onClick={() => setOpen(false)}>
-              —
+        <div className="fixed bottom-6 right-6 z-50 flex h-[500px] max-h-[70vh] w-96 flex-col overflow-hidden rounded-xl bg-white shadow-lg">
+          <div className="flex h-10 items-center px-4 bg-[#171310] text-white">
+            <span className="text-sm font-medium">Human Digestion Chat</span>
+            <span className="flex-1" />
+            <button
+              aria-label="Minimize"
+              onClick={() => setOpen(false)}
+              className="px-2 text-white/60 hover:text-white"
+            >
+              –
             </button>
-            {/* 'X': Close & End Chat */}
-            <button className="ml-auto cursor-pointer" onClick={() => setOpen(false)}>
-              X
+            <button
+              aria-label="Close"
+              onClick={() => setOpen(false)}
+              className="px-2 text-white/60 hover:text-white"
+            >
+              ×
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-4 py-4 text-black">
+
+          <div className="flex-1 overflow-y-auto bg-[#FAF7F0] p-4">
             {chatHistory}
-            {loading && <div className="py-1 text-stone">Thinking…</div>}
-            {error && <div className="py-1 text-red-500">{error}</div>}
+            {loading && (
+              <div className="py-1 text-sm text-stone">Thinking…</div>
+            )}
+            {error && <div className="py-1 text-sm text-red-500">{error}</div>}
           </div>
+
           <form
             onSubmit={handleSubmit}
-            className="flex items-center px-4 text-black border mr-4 ml-4 mb-3 rounded-full"
+            className="flex items-center gap-2 border-t border-black/10 p-3"
           >
-            <textarea
-              className="flex-1 outline-none resize-none h-12 pt-2.5"
+            <input
+              className="flex-1 rounded-lg border border-black/15 px-3 py-2 text-sm outline-none text-black"
               maxLength={500}
               placeholder="Ask me a question..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-            ></textarea>
-            <button type="submit" disabled={loading} className="cursor-pointer">
-              <Image src="/sendbutton.png" alt="Send" width={30} height={24} />
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              aria-label="Send"
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-bronze text-white"
+            >
+              →
             </button>
           </form>
         </div>

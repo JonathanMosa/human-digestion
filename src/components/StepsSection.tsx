@@ -11,27 +11,27 @@ export default function StepsSection({
   onSelect,
 }: StepsSectionProps) {
   return (
-    <section className="px-20 py-16 bg-linen">
+    <section className="px-20 py-16 bg-[#FAF7F0]">
       <p className="text-sm tracking-widest uppercase text-stone pb-8">
         Digestion Pathway
       </p>
 
-      <div className="flex gap-6">
+      <div className="grid grid-cols-5 gap-3">
         {steps.map((step) => (
           <div
             key={step.id}
             onClick={() => onSelect(step.id)} // report the click up; page.tsx owns the state
-            className={`rounded-xl px-6 py-8 flex flex-col gap-3 w-52 cursor-pointer transition
+            className={`rounded-xl px-6 py-8 flex flex-col gap-3 cursor-pointer transition
               ${
                 selectedId === step.id
-                  ? "bg-bronze border border-bronze" // active
-                  : "bg-[#ecc582] border border-stone" // inactive
+                  ? "bg-[#2A2520] text-white" // active
+                  : "bg-[#E8C99B] text-[#4A1B0C] hover:-translate-y-0.5" // inactive
               }`}
           >
-            <p className="text-xs font-semibold tracking-widest uppercase text-[#7a5c2e]">
+            <p className="text-xs font-semibold tracking-widest uppercase opacity-70">
               {step.label}
             </p>
-            <p className="text-xl font-medium text-espresso">{step.organ}</p>
+            <p className="text-xl font-medium">{step.organ}</p>
           </div>
         ))}
       </div>
