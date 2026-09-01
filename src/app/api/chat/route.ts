@@ -2,29 +2,38 @@
 // cosine similarity, hand those to groq as context, return the answer.
 
 import embeddings from "@/data/embeddings.json";
-import { pipeline } from "@huggingface/transformers";
 
 export const runtime = "nodejs";
+export const maxDuration = 60; // two hops (hugging face + groq), and HF is slow
 
 // embedding
 
-// load the model once and reuse it.
-let extractorPromise: Promise<any> | null = null;
-function getExtractor() {
-  if (!extractorPromise) {
-    extractorPromise = pipeline(
-      "feature-extraction",
-      "Xenova/all-MiniLM-L6-v2",
-    );
+async function embedText(text: string): Promise<number[]> {
+  const res = await fetch(
+    "https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2/pipeline/feature-extraction",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.HF_API_KEY}`,
+      },
+      body: JSON.stringify({ inputs: text }),
+      signal: AbortSignal.timeout(45_000),
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`HF embedding failed (${res.status}): ${await res.text()}`);
   }
-  return extractorPromise;
+
+  const vector = (await res.json()) as number[];
+  return normalize(vector);
 }
 
-// same options as embed.ts, otherwise the query vector won't line up with the stored ones.
-async function embedText(text: string): Promise<number[]> {
-  const extractor = await getExtractor();
-  const output = await extractor(text, { pooling: "mean", normalize: true });
-  return Array.from(output.data) as number[];
+// embed.ts stored unit-length vectors, normalize for the dot product.
+function normalize(v: number[]): number[] {
+  const length = Math.sqrt(v.reduce((sum, x) => sum + x * x, 0));
+  return v.map((x) => x / length);
 }
 
 // retrieval
